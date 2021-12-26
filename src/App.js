@@ -1,18 +1,21 @@
 import React from 'react';
+import logo from './images/header-logo.svg';
+import avatar from './images/profile-avatar.png';
+import edit_avatar from './images/profile-avatar-button.svg';
 
 function App() {
   return (
-    <>
+    <body className="body">
       <div className="page">
         <header className="header">
-          <img src="<%=require('./images/header-logo.svg')%>" alt="Логотип Место" className="logo" />
+          <img src={logo} alt="Логотип Место" className="logo" />
         </header>
         <main className="content">
           <section className="profile">
             <div className="profile__info">
               <div className="profile__avatar-container">
-                <img src="<%=require('./images/profile-avatar.png')%>" alt="Аватар" className="profile__avatar" />
-                <img src="<%=require('./images/profile-avatar-button.svg')%>" alt="Поменять аватар" className="profile__avatar-icon" />
+                <img src={avatar} alt="Аватар" className="profile__avatar" />
+                <img src={edit_avatar} alt="Поменять аватар" className="profile__avatar-icon" />
               </div>
               <div className="profile__text">
                 <div className="profile__title">
@@ -137,7 +140,7 @@ function App() {
           </div>
         </article>
       </template>
-    </>
+    </body>
   );
 }
 
