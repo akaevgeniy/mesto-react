@@ -1,7 +1,7 @@
 import React from 'react';
-import logo from './images/header-logo.svg';
-import avatar from './images/profile-avatar.png';
-import edit_avatar from './images/profile-avatar-button.svg';
+import logo from '../images/header-logo.svg';
+import avatar from '../images/profile-avatar.png';
+import edit_avatar from '../images/profile-avatar-button.svg';
 
 function App() {
   return (
