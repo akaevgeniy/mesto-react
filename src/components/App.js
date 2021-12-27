@@ -1,37 +1,15 @@
 import React from 'react';
-import logo from '../images/header-logo.svg';
-import avatar from '../images/profile-avatar.png';
-import edit_avatar from '../images/profile-avatar-button.svg';
+import Header from './Header';
+import Main from './Main';
+import Footer from './Footer';
 
 function App() {
   return (
     <body className="body">
       <div className="page">
-        <header className="header">
-          <img src={logo} alt="Логотип Место" className="logo" />
-        </header>
-        <main className="content">
-          <section className="profile">
-            <div className="profile__info">
-              <div className="profile__avatar-container">
-                <img src={avatar} alt="Аватар" className="profile__avatar" />
-                <img src={edit_avatar} alt="Поменять аватар" className="profile__avatar-icon" />
-              </div>
-              <div className="profile__text">
-                <div className="profile__title">
-                  <h1 className="profile__name">Жак-Ив Кусто</h1>
-                  <button className="profile__edit-button" type="button" aria-label="Редактировать"></button>
-                </div>
-                <p className="profile__about">Исследователь океана</p>
-              </div>
-            </div>
-            <button className="profile__add-button" type="button" aria-label="Добавить"></button>
-          </section>
-          <section aria-label="label" class="elements"></section>
-        </main>
-        <footer className="footer">
-          <p className="footer__text">&copy; 2021 Mesto Russia</p>
-        </footer>
+        <Header />
+        <Main />
+        <Footer />
         <div className="popup popup_form_edit">
           <div className="popup__container">
             <button className="popup__close" type="button" aria-label="Закрыть окно"></button>
@@ -95,7 +73,7 @@ function App() {
         <div className="popup popup_form_image">
           <figure className="popup__picture">
             <button className="popup__close" type="button" aria-label="Закрыть окно"></button>
-            <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg" alt="Рисунок" class="popup__photo" />
+            <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg" alt="Рисунок" className="popup__photo" />
             <figcaption className="popup__caption"></figcaption>
           </figure>
         </div>
