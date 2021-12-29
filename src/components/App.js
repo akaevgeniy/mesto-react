@@ -2,19 +2,33 @@ import React from 'react';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
+import PopupWithForm from './PopupWithForm';
 
 function App() {
+  const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
+  const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
+
+  const handleEditAvatarClick = () => {
+    setEditAvatarPopupOpen(true);
+  };
+  const handleEditProfileClick = () => {
+    setEditProfilePopupOpen(true);
+  };
+  const handleAddPlaceClick = () => {
+    setAddPlacePopupOpen(true);
+  };
   return (
-    <body className="body">
+    <>
       <div className="page">
         <Header />
-        <Main />
+        <Main onEditAvatar={handleEditAvatarClick} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} />
         <Footer />
-        <div className="popup popup_form_edit">
-          <div className="popup__container">
-            <button className="popup__close" type="button" aria-label="Закрыть окно"></button>
-            <form className="popup__form popup__form_edit-form" name="popup__edit-form" novalidate>
-              <h2 className="popup__title">Редактировать профиль</h2>
+        <PopupWithForm
+          name="edit"
+          title="Редактировать профиль"
+          children={
+            <>
               <input
                 id="profile-name"
                 className="popup__input popup__input_is_name"
@@ -22,8 +36,6 @@ function App() {
                 type="text"
                 placeholder="Имя"
                 required
-                minlength="2"
-                maxlength="30"
               />
               <span id="profile-name-error" className="popup__error"></span>
               <input
@@ -33,26 +45,24 @@ function App() {
                 type="text"
                 placeholder="О себе"
                 required
-                minlength="2"
-                maxlength="200"
               />
               <span id="profile-about-error" className="popup__error"></span>
               <input type="submit" className="popup__submit" value="Сохранить" />
-            </form>
-          </div>
-        </div>
-        <div className="popup popup_form_add-element">
-          <div className="popup__container">
-            <button className="popup__close" type="button" aria-label="Закрыть окно"></button>
-            <form className="popup__form popup__form_add-form" name="popup__add-form" novalidate>
-              <h2 className="popup__title">Новое место</h2>
+            </>
+          }
+          isOpen={isEditProfilePopupOpen}
+        />
+
+        <PopupWithForm
+          name="add"
+          title="Новое место"
+          children={
+            <>
               <input
                 id="name-card"
                 className="popup__input popup__input_is_add-name"
                 name="popup__input_is_add_name"
                 type="text"
-                minlength="2"
-                maxlength="30"
                 placeholder="Название"
                 required
               />
@@ -67,30 +77,26 @@ function App() {
               />
               <span id="url-card-error" className="popup__error"></span>
               <input type="submit" className="popup__submit" value="Создать" />
-            </form>
-          </div>
-        </div>
-        <div className="popup popup_form_image">
-          <figure className="popup__picture">
-            <button className="popup__close" type="button" aria-label="Закрыть окно"></button>
-            <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg" alt="Рисунок" className="popup__photo" />
-            <figcaption className="popup__caption"></figcaption>
-          </figure>
-        </div>
-        <div className="popup popup_form_confirm">
-          <div className="popup__container">
-            <button className="popup__close" type="button" aria-label="Закрыть окно"></button>
-            <form className="popup__form popup__form_confirm" name="popup__form_confirm" novalidate>
-              <h2 className="popup__title popup__title_confirm">Вы уверены?</h2>
+            </>
+          }
+          isOpen={isAddPlacePopupOpen}
+        />
+
+        <PopupWithForm
+          name="confirm"
+          title="Вы уверены?"
+          children={
+            <>
               <input type="submit" className="popup__submit" value="Да" />
-            </form>
-          </div>
-        </div>
-        <div className="popup popup_form_avatar-update">
-          <div className="popup__container">
-            <button className="popup__close" type="button" aria-label="Закрыть окно"></button>
-            <form className="popup__form popup__form_avatar-update" name="popup__form_avatar" novalidate>
-              <h2 className="popup__title">Обновить аватар</h2>
+            </>
+          }
+        />
+
+        <PopupWithForm
+          name="avatar-update"
+          title="Обновить аватар"
+          children={
+            <>
               <input
                 id="url-avatar"
                 className="popup__input popup__input_is_avatar-link"
@@ -101,24 +107,26 @@ function App() {
               />
               <span id="url-avatar-error" className="popup__error"></span>
               <input type="submit" className="popup__submit" value="Сохранить" />
-            </form>
-          </div>
-        </div>
+            </>
+          }
+          isOpen={isEditAvatarPopupOpen}
+        />
       </div>
+
       <template className="element-template">
         <article className="element">
           <button className="element__delete" type="button"></button>
           <img src="./images/element-bermamit.jpg" alt="Плато Бермамыт" className="element__photo" />
           <div className="element__text">
             <h2 className="element__title"></h2>
-            <dev className="element__like-container">
+            <div className="element__like-container">
               <button className="element__like" type="button"></button>
               <p className="element__like-count">0</p>
-            </dev>
+            </div>
           </div>
         </article>
       </template>
-    </body>
+    </>
   );
 }
 
