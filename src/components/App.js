@@ -121,20 +121,6 @@ function App() {
           onClose={closeAllPopups}
         />
       </div>
-
-      <template className="element-template">
-        <article className="element">
-          <button className="element__delete" type="button"></button>
-          <img src="./images/element-bermamit.jpg" alt="Плато Бермамыт" className="element__photo" />
-          <div className="element__text">
-            <h2 className="element__title"></h2>
-            <div className="element__like-container">
-              <button className="element__like" type="button"></button>
-              <p className="element__like-count">0</p>
-            </div>
-          </div>
-        </article>
-      </template>
     </>
   );
 }
