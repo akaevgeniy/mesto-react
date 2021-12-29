@@ -18,6 +18,11 @@ function App() {
   const handleAddPlaceClick = () => {
     setAddPlacePopupOpen(true);
   };
+  const closeAllPopups = () => {
+    setEditAvatarPopupOpen(false);
+    setEditProfilePopupOpen(false);
+    setAddPlacePopupOpen(false);
+  };
   return (
     <>
       <div className="page">
@@ -51,6 +56,7 @@ function App() {
             </>
           }
           isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
         />
 
         <PopupWithForm
@@ -80,6 +86,7 @@ function App() {
             </>
           }
           isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
         />
 
         <PopupWithForm
@@ -90,6 +97,7 @@ function App() {
               <input type="submit" className="popup__submit" value="Да" />
             </>
           }
+          onClose={closeAllPopups}
         />
 
         <PopupWithForm
@@ -110,6 +118,7 @@ function App() {
             </>
           }
           isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
         />
       </div>
 
