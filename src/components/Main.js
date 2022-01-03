@@ -1,24 +1,24 @@
 import React from 'react';
 import edit_avatar from '../images/profile-avatar-button.svg';
-import Api from '../utils/Api';
+import api from '../utils/Api';
+import Card from './Card';
 function Main(props) {
   const [userName, setUserName] = React.useState('');
   const [userDescription, setUserDescription] = React.useState('');
   const [userAvatar, setUserAvatar] = React.useState('');
-  const [cards, setCards] = React.useState([]);
+  const [cards, setCards] = React.useState([{}]);
+  React.useEffect(() => {
+    Promise.all([api.getUserProfile(), api.getInitialCards()])
+      .then(([userData, placeCards]) => {
+        setUserName(userData.name);
+        setUserDescription(userData.about);
+        setUserAvatar(userData.avatar);
+        setCards(placeCards);
+        console.log(placeCards);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
-  Promise.all([Api.getUserProfile(), Api.getInitialCards()])
-    .then(([userData, cardsPlace]) => {
-      setUserName(userData.name);
-      setUserDescription(userData.about);
-      setUserAvatar(userData.avatar);
-      setCards(cardsPlace);
-
-      //рендерим карточки в контейнер
-      //cardList.renderItems(cards.reverse());
-    })
-    .catch((err) => console.log(err));
- 
   return (
     <main className="content">
       <section className="profile">
@@ -38,19 +38,9 @@ function Main(props) {
         <button className="profile__add-button" type="button" aria-label="Добавить" onClick={props.onAddPlace}></button>
       </section>
       <section aria-label="label" className="elements">
-        {/* {cards.forEach((element) => {
-          <article className="element">
-            <button className="element__delete" type="button"></button>
-            <img src="./images/element-bermamit.jpg" alt="Плато Бермамыт" className="element__photo" />
-            <div className="element__text">
-              <h2 className="element__title"></h2>
-              <div className="element__like-container">
-                <button className="element__like" type="button"></button>
-                <p className="element__like-count">0</p>
-              </div>
-            </div>
-          </article>;
-        })} */}
+        {cards.map((elem) => {
+          return <Card key={elem._id} card={elem} onCardClick={props.onCardClick} />;
+        })}
       </section>
     </main>
   );

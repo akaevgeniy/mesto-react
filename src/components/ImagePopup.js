@@ -1,10 +1,10 @@
 function ImagePopup(props) {
   return (
-    <div className="popup popup_form_image">
+    <div className={`popup popup_form_image ${props.card.hasOwnProperty('link') ? 'popup_is-opened' : ''}`}>
       <figure className="popup__picture">
-        <button className="popup__close" type="button" aria-label="Закрыть окно"></button>
-        <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg" alt="Рисунок" className="popup__photo" />
-        <figcaption className="popup__caption"></figcaption>
+        <button className="popup__close" type="button" aria-label="Закрыть окно" onClick={props.onClose}></button>
+        <img src={props.card.link} alt={props.card.name} className="popup__photo" />
+        <figcaption className="popup__caption">{props.card.name}</figcaption>
       </figure>
     </div>
   );
