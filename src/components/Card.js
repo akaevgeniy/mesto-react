@@ -1,4 +1,5 @@
 function Card(props) {
+  //функция, откывающая попап с изображением, активируется при нажатии на фото карточки
   function handleClick() {
     props.onCardClick(props.card);
   }

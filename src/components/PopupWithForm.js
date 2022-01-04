@@ -1,3 +1,4 @@
+//компонент для всех попапов с формой, присваиваем нужные пропсы классам и другим свойствам
 function PopupWithForm(props) {
   return (
     <div className={`popup popup_form_${props.name} ${props.isOpen ? 'popup_is-opened' : ''}`}>

@@ -1,3 +1,4 @@
+//функция для отображения попапа с изображением
 function ImagePopup(props) {
   return (
     <div className={`popup popup_form_image ${props.card.hasOwnProperty('link') ? 'popup_is-opened' : ''}`}>

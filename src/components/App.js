@@ -6,11 +6,12 @@ import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 
 function App() {
+  //объявляем стейты попапов и карточки
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({});
-
+  //функции, изменяющие значения стейтов
   const handleEditAvatarClick = () => {
     setEditAvatarPopupOpen(true);
   };
@@ -20,15 +21,18 @@ function App() {
   const handleAddPlaceClick = () => {
     setAddPlacePopupOpen(true);
   };
+  //функция для закрытия всех попапов
   const closeAllPopups = () => {
     setEditAvatarPopupOpen(false);
     setEditProfilePopupOpen(false);
     setAddPlacePopupOpen(false);
     setSelectedCard({});
   };
+  //функция, присваивающая нужную карточку стейту
   const handleCardClick = (card) => {
     setSelectedCard(card);
   };
+  //отрисовка секций
   return (
     <>
       <div className="page">
