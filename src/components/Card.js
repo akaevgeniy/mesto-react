@@ -2,11 +2,8 @@ function Card(props) {
   function handleClick() {
     props.onCardClick(props.card);
   }
-  if (!props.card.hasOwnProperty('link')) {
-    return '';
-  }
   return (
-    <article key="{props.key}" className="element">
+    <article key={props.card._id} className="element">
       <button className="element__delete" type="button"></button>
       <img src={props.card.link} alt={props.card.name} className="element__photo" onClick={handleClick} />
       <div className="element__text">

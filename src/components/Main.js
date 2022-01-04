@@ -7,16 +7,18 @@ function Main(props) {
   const [userDescription, setUserDescription] = React.useState('');
   const [userAvatar, setUserAvatar] = React.useState('');
   const [cards, setCards] = React.useState([{}]);
+  const parseError = (err) => {
+    console.log(err);
+  };
   React.useEffect(() => {
     Promise.all([api.getUserProfile(), api.getInitialCards()])
       .then(([userData, placeCards]) => {
         setUserName(userData.name);
         setUserDescription(userData.about);
         setUserAvatar(userData.avatar);
-        setCards(placeCards);
-        console.log(placeCards);
+        setCards(placeCards.reverse());
       })
-      .catch((err) => console.log(err));
+      .catch((err) => parseError(err));
   }, []);
 
   return (
@@ -39,7 +41,7 @@ function Main(props) {
       </section>
       <section aria-label="label" className="elements">
         {cards.map((elem) => {
-          return <Card key={elem._id} card={elem} onCardClick={props.onCardClick} />;
+          return elem.hasOwnProperty('link') ? <Card key={elem._id} card={elem} onCardClick={props.onCardClick} /> : '';
         })}
       </section>
     </main>
