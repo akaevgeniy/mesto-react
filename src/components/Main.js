@@ -24,7 +24,7 @@ function Main(props) {
       })
       .catch((err) => parseError(err));
   }, []);
-
+  //jsx разметка компонента Main
   return (
     <main className="content">
       <section className="profile">
