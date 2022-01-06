@@ -8,7 +8,7 @@ function Main(props) {
   const [userName, setUserName] = React.useState('');
   const [userDescription, setUserDescription] = React.useState('');
   const [userAvatar, setUserAvatar] = React.useState('');
-  const [cards, setCards] = React.useState([{}]);
+  const [cards, setCards] = React.useState([]);
   //функция, выводящая в консоль ошибку при запросе к АПИ
   const parseError = (err) => {
     console.log(err);
@@ -45,7 +45,7 @@ function Main(props) {
       </section>
       <section aria-label="label" className="elements">
         {cards.map((elem) => {
-          return elem.hasOwnProperty('link') ? <Card key={elem._id} card={elem} onCardClick={props.onCardClick} /> : '';
+          return <Card key={elem._id} card={elem} onCardClick={props.onCardClick} />;
         })}
       </section>
     </main>
