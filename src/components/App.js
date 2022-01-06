@@ -46,6 +46,7 @@ function App() {
       <PopupWithForm
         name="edit"
         title="Редактировать профиль"
+        buttonText="Сохранить"
         children={
           <>
             <input
@@ -66,7 +67,6 @@ function App() {
               required
             />
             <span id="profile-about-error" className="popup__error"></span>
-            <input type="submit" className="popup__submit" value="Сохранить" />
           </>
         }
         isOpen={isEditProfilePopupOpen}
@@ -76,6 +76,7 @@ function App() {
       <PopupWithForm
         name="add"
         title="Новое место"
+        buttonText="Создать"
         children={
           <>
             <input
@@ -96,27 +97,18 @@ function App() {
               required
             />
             <span id="url-card-error" className="popup__error"></span>
-            <input type="submit" className="popup__submit" value="Создать" />
           </>
         }
         isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
       />
 
-      <PopupWithForm
-        name="confirm"
-        title="Вы уверены?"
-        children={
-          <>
-            <input type="submit" className="popup__submit" value="Да" />
-          </>
-        }
-        onClose={closeAllPopups}
-      />
+      <PopupWithForm name="confirm" title="Вы уверены?" buttonText="Да" onClose={closeAllPopups} />
 
       <PopupWithForm
         name="avatar-update"
         title="Обновить аватар"
+        buttonText="Сохранить"
         children={
           <>
             <input
@@ -128,7 +120,6 @@ function App() {
               required
             />
             <span id="url-avatar-error" className="popup__error"></span>
-            <input type="submit" className="popup__submit" value="Сохранить" />
           </>
         }
         isOpen={isEditAvatarPopupOpen}
