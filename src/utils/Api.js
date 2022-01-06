@@ -1,8 +1,8 @@
 class Api {
   constructor(options) {
     this._baseUrl = options.baseUrl;
-    this._authorization = options.headers.authorization;
-    this._content_type = options.headers['Content-Type'];
+    this._authorization = options.authorization;
+    this._content_type = options['Content-Type'];
   }
   //выносим в отдельный метод проверку ответа от сервера
   _parseResponse(res) {
@@ -91,22 +91,10 @@ class Api {
       .then((res) => this._parseResponse(res))
       .catch((err) => Promise.reject(err));
   }
-  //реализация PUT-запроса для постановки лайка
-  setLike(id) {
+  //реализация PUT-запроса для постановки лайка или удаление лайка - отправляем DELETE-запрос
+  changeLike(id, isLiked) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
-      method: 'PUT',
-      headers: {
-        authorization: this._authorization,
-        'Content-Type': this._content_type,
-      },
-    })
-      .then((res) => this._parseResponse(res))
-      .catch((err) => Promise.reject(err));
-  }
-  //Удаление лайка, отправляем DELETE-запрос
-  deleteLike(id) {
-    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
-      method: 'DELETE',
+      method: isLiked ? 'DELETE' : 'PUT',
       headers: {
         authorization: this._authorization,
         'Content-Type': this._content_type,
@@ -119,8 +107,6 @@ class Api {
 //Создаем и экспортируем экземпляр Api со ссылкой на сервер и данных об авторизации
 export default Api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-31',
-  headers: {
-    authorization: '23d5ae49-b998-4b92-a5a2-4ca503425f9c',
-    'Content-Type': 'application/json',
-  },
+  authorization: '23d5ae49-b998-4b92-a5a2-4ca503425f9c',
+  'Content-Type': 'application/json',
 });
