@@ -34,6 +34,16 @@ function Main(props) {
       })
       .catch((err) => parseError(err));
   }
+  //Функция для удаления карточки
+  function handleCardDelete(card) {
+    api
+      .deleteCard(card._id)
+      .then((updateCards) => {
+        setCards(cards.filter((elem) => elem._id !== card._id));
+        console.log(updateCards);
+      })
+      .catch((err) => parseError(err));
+  }
   //jsx разметка компонента Main
   return (
     <main className="content">
@@ -55,7 +65,7 @@ function Main(props) {
       </section>
       <section aria-label="label" className="elements">
         {cards.map((elem) => (
-          <Card key={elem._id} card={elem} onCardClick={props.onCardClick} onCardLike={handleCardLike} />
+          <Card key={elem._id} card={elem} onCardClick={props.onCardClick} onCardLike={handleCardLike} onCardDelete={handleCardDelete} />
         ))}
       </section>
     </main>
