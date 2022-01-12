@@ -2,7 +2,7 @@ class Api {
   constructor(options) {
     this._baseUrl = options.baseUrl;
     this._authorization = options.authorization;
-    this._content_type = options['Content-Type'];
+    this._content_type = options.ContentType;
   }
   //выносим в отдельный метод проверку ответа от сервера
   _parseResponse(res) {
@@ -108,5 +108,5 @@ class Api {
 export default Api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-31',
   authorization: '23d5ae49-b998-4b92-a5a2-4ca503425f9c',
-  'Content-Type': 'application/json',
+  ContentType: 'application/json',
 });
