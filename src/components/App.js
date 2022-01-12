@@ -3,6 +3,7 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
+import EditProfilePopup from './EditProfilePopup';
 import ImagePopup from './ImagePopup';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 import api from '../utils/Api';
@@ -60,19 +61,7 @@ function App() {
           onCardClick={handleCardClick}
         />
         <Footer />
-        <PopupWithForm name="edit" title="Редактировать профиль" buttonText="Сохранить" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
-          <input id="profile-name" className="popup__input popup__input_is_name" name="popup__input_is_name" type="text" placeholder="Имя" required />
-          <span id="profile-name-error" className="popup__error"></span>
-          <input
-            id="profile-about"
-            className="popup__input popup__input_is_about"
-            name="popup__input_is_about"
-            type="text"
-            placeholder="О себе"
-            required
-          />
-          <span id="profile-about-error" className="popup__error"></span>
-        </PopupWithForm>
+        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
 
         <PopupWithForm name="add" title="Новое место" buttonText="Создать" isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
           <input

@@ -5,7 +5,7 @@ function Card(props) {
   // Определяем, являемся ли мы владельцем текущей карточки
   const isOwn = props.card.owner._id === currentUser._id;
   // Создаём переменную, которую после зададим в `className` для кнопки удаления
-  const cardDeleteButtonClassName = `element__delete ${isOwn ? 'element__delete' : 'element__delete_is-hidden'}`;
+  const cardDeleteButtonClassName = `element__delete ${isOwn ? '' : 'element__delete_is-hidden'}`;
   // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
   const isLiked = props.card.likes.some((i) => i._id === currentUser._id);
   // Создаём переменную, которую после зададим в `className` для кнопки лайка
