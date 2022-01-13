@@ -2,6 +2,7 @@ import React from 'react';
 import PopupWithForm from './PopupWithForm';
 
 function EditAvatarPopup(props) {
+  //создаем реф для обращения к инпуту в ДОМ
   const avatarInputRef = React.useRef();
   //Функция сабмита формы для изменения аватара
   function handleSubmit(e) {
