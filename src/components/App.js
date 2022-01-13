@@ -49,6 +49,16 @@ function App() {
   const handleCardClick = (card) => {
     setSelectedCard(card);
   };
+  //обработчик для обновления информации о пользователе
+  const handleUpdateUser = ({ name, about }) => {
+    api
+      .updateUserProfile({ name, about })
+      .then((userInfo) => {
+        setCurrentUser(userInfo);
+        closeAllPopups();
+      })
+      .catch((err) => parseError(err));
+  };
   //отрисовка секций
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -61,7 +71,7 @@ function App() {
           onCardClick={handleCardClick}
         />
         <Footer />
-        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
+        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
 
         <PopupWithForm name="add" title="Новое место" buttonText="Создать" isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
           <input

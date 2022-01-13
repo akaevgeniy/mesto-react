@@ -6,11 +6,23 @@ function EditProfilePopup(props) {
   const currentUser = React.useContext(CurrentUserContext);
   const [name, setName] = React.useState('');
   const [description, setDescription] = React.useState('');
+  //функция, меняющая поле с именем при изменении значения в инпуте
   function handleNameChange(e) {
     setName(e.target.value);
   }
+  //функция, меняющая поле с информациоей пользователя при изменении значения в инпуте
   function handleDescriptionChange(e) {
     setDescription(e.target.value);
+  }
+  //обработчик сабмита, сохранение данных в АПИ
+  function handleSubmit(e) {
+    // Запрещаем браузеру переходить по адресу формы
+    e.preventDefault();
+    // Передаём значения управляемых компонентов во внешний обработчик
+    props.onUpdateUser({
+      name,
+      about: description,
+    });
   }
   // После загрузки текущего пользователя из API
   // его данные будут использованы в управляемых компонентах.
@@ -19,7 +31,14 @@ function EditProfilePopup(props) {
     setDescription(currentUser.about);
   }, [currentUser]);
   return (
-    <PopupWithForm name="edit" title="Редактировать профиль" buttonText="Сохранить" isOpen={props.isOpen} onClose={props.onClose}>
+    <PopupWithForm
+      name="edit"
+      title="Редактировать профиль"
+      buttonText="Сохранить"
+      isOpen={props.isOpen}
+      onClose={props.onClose}
+      onSubmit={handleSubmit}
+    >
       <input
         id="profile-name"
         className="popup__input popup__input_is_name"
