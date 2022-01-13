@@ -25,18 +25,10 @@ function App() {
   };
   //создаем эффект, изменяющий при монтировании стейты на данные из сервера
   React.useEffect(() => {
-    api
-      .getUserProfile()
-      .then((userData) => {
+    //Загружаем информацию о пользователе с сервера и создаем экземпляры Card, объединенно вызываем запросы с Api
+    Promise.all([api.getUserProfile(), api.getInitialCards()])
+      .then(([userData, placeCards]) => {
         setCurrentUser(userData);
-      })
-      .catch((err) => parseError(err));
-  }, []);
-  //создаем эффект, изменяющий при монтировании стейт на данные из сервера
-  React.useEffect(() => {
-    api
-      .getInitialCards()
-      .then((placeCards) => {
         setCards(placeCards);
       })
       .catch((err) => parseError(err));
