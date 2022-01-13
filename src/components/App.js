@@ -4,6 +4,7 @@ import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
 import ImagePopup from './ImagePopup';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 import api from '../utils/Api';
@@ -59,6 +60,16 @@ function App() {
       })
       .catch((err) => parseError(err));
   };
+  //обработчик для обновления аватара пользователя
+  const handleUpdateAvatar = (url) => {
+    api
+      .updateAvatar(url)
+      .then((userInfo) => {
+        setCurrentUser(userInfo);
+        closeAllPopups();
+      })
+      .catch((err) => parseError(err));
+  };
   //отрисовка секций
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -72,6 +83,8 @@ function App() {
         />
         <Footer />
         <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
+
+        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
 
         <PopupWithForm name="add" title="Новое место" buttonText="Создать" isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
           <input
@@ -95,18 +108,6 @@ function App() {
         </PopupWithForm>
 
         <PopupWithForm name="confirm" title="Вы уверены?" buttonText="Да" onClose={closeAllPopups} />
-
-        <PopupWithForm name="avatar-update" title="Обновить аватар" buttonText="Сохранить" isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}>
-          <input
-            id="url-avatar"
-            className="popup__input popup__input_is_avatar-link"
-            name="popup__input_is_avatar_link"
-            type="url"
-            placeholder="Ссылка на аватар"
-            required
-          />
-          <span id="url-avatar-error" className="popup__error"></span>
-        </PopupWithForm>
 
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
       </div>
