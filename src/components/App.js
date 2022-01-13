@@ -16,6 +16,8 @@ function App() {
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({});
   const [currentUser, setCurrentUser] = React.useState({});
+  //данные о карточках
+  const [cards, setCards] = React.useState([]);
   //функция, выводящая в консоль ошибку при запросе к АПИ
   const parseError = (err) => {
     console.log(err);
@@ -29,6 +31,37 @@ function App() {
       })
       .catch((err) => parseError(err));
   }, []);
+  //создаем эффект, изменяющий при монтировании стейт на данные из сервера
+  React.useEffect(() => {
+    api
+      .getInitialCards()
+      .then((placeCards) => {
+        setCards(placeCards);
+      })
+      .catch((err) => parseError(err));
+  }, []);
+  //Функция для постановки/снятия лайка
+  function handleCardLike(card) {
+    // Снова проверяем, есть ли уже лайк на этой карточке
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    // Отправляем запрос в API и получаем обновлённые данные карточки
+    api
+      .changeLike(card._id, isLiked)
+      .then((newCard) => {
+        setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
+      })
+      .catch((err) => parseError(err));
+  }
+  //Функция для удаления карточки
+  function handleCardDelete(card) {
+    api
+      .deleteCard(card._id)
+      .then((updateCards) => {
+        setCards(cards.filter((elem) => elem._id !== card._id));
+        console.log(updateCards);
+      })
+      .catch((err) => parseError(err));
+  }
   //функции, изменяющие значения стейтов
   const handleEditAvatarClick = () => {
     setEditAvatarPopupOpen(true);
@@ -80,6 +113,9 @@ function App() {
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
           onCardClick={handleCardClick}
+          cards={cards}
+          onCardLike={handleCardLike}
+          onCardDelete={handleCardDelete}
         />
         <Footer />
         <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
