@@ -18,9 +18,7 @@ class Api {
       headers: {
         authorization: this._authorization,
       },
-    })
-      .then((res) => this._parseResponse(res))
-      .catch((err) => Promise.reject(err));
+    }).then((res) => this._parseResponse(res));
   }
   //метод, загружающий информацию о пользователе
   getUserProfile() {
@@ -28,9 +26,7 @@ class Api {
       headers: {
         authorization: this._authorization,
       },
-    })
-      .then((res) => this._parseResponse(res))
-      .catch((err) => Promise.reject(err));
+    }).then((res) => this._parseResponse(res));
   }
   //метод для изменения данных пользователя на сервере
   updateUserProfile({ name, about }) {
@@ -44,9 +40,7 @@ class Api {
         name: name,
         about: about,
       }),
-    })
-      .then((res) => this._parseResponse(res))
-      .catch((err) => Promise.reject(err));
+    }).then((res) => this._parseResponse(res));
   }
   //метод для изменения ссылки на аватар пользователя на сервере
   updateAvatar(url) {
@@ -59,9 +53,7 @@ class Api {
       body: JSON.stringify({
         avatar: url,
       }),
-    })
-      .then((res) => this._parseResponse(res))
-      .catch((err) => Promise.reject(err));
+    }).then((res) => this._parseResponse(res));
   }
   //метод для добавления на сервер новой карточки
   addNewCard({ name, link }) {
@@ -75,9 +67,7 @@ class Api {
         name,
         link,
       }),
-    })
-      .then((res) => this._parseResponse(res))
-      .catch((err) => Promise.reject(err));
+    }).then((res) => this._parseResponse(res));
   }
   //метод для удаления карточки из БД сервера
   deleteCard(id) {
@@ -87,9 +77,7 @@ class Api {
         authorization: this._authorization,
         'Content-Type': this._content_type,
       },
-    })
-      .then((res) => this._parseResponse(res))
-      .catch((err) => Promise.reject(err));
+    }).then((res) => this._parseResponse(res));
   }
   //реализация PUT-запроса для постановки лайка или удаление лайка - отправляем DELETE-запрос
   changeLike(id, isLiked) {
@@ -99,9 +87,7 @@ class Api {
         authorization: this._authorization,
         'Content-Type': this._content_type,
       },
-    })
-      .then((res) => this._parseResponse(res))
-      .catch((err) => Promise.reject(err));
+    }).then((res) => this._parseResponse(res));
   }
 }
 //Создаем и экспортируем экземпляр Api со ссылкой на сервер и данных об авторизации
