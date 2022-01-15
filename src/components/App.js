@@ -18,6 +18,7 @@ function App() {
   const [isConfirmPopupOpen, setConfirmPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({});
   const [deletedCard, setDeletedCard] = React.useState({});
+  //информация о пользователе
   const [currentUser, setCurrentUser] = React.useState({});
   //данные о карточках
   const [cards, setCards] = React.useState([]);
@@ -47,7 +48,7 @@ function App() {
       })
       .catch((err) => parseError(err));
   }
-  //Функция для удаления карточки
+  //Функция для удаления карточки, запрос к АПИ
   function handleCardDelete(card) {
     api
       .deleteCard(card._id)
@@ -68,6 +69,7 @@ function App() {
   const handleAddPlaceClick = () => {
     setAddPlacePopupOpen(true);
   };
+  //функция, открывающая попап подтверждения, принимает стейт карточки для удаления
   const handleDeleteCardClick = (card) => {
     setConfirmPopupOpen(true);
     setDeletedCard(card);
@@ -80,7 +82,7 @@ function App() {
     setConfirmPopupOpen(false);
     setSelectedCard({});
   };
-  //функция, присваивающая нужную карточку стейту
+  //функция, присваивающая нужную карточку стейту (для открытия попапа с рисунком)
   const handleCardClick = (card) => {
     setSelectedCard(card);
   };
@@ -104,6 +106,7 @@ function App() {
       })
       .catch((err) => parseError(err));
   };
+  //функция для добавления новой карточки на сервер, сразу отрисовывается в разметке
   const handleAddPlaceSubmit = ({ name, link }) => {
     api
       .addNewCard({ name, link })
@@ -113,7 +116,7 @@ function App() {
       })
       .catch((err) => parseError(err));
   };
-  //отрисовка секций
+  //отрисовка секций, оборачиваем всё в контекст (данные о пользователе будут доступны со всех компонентов)
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -128,6 +131,7 @@ function App() {
           onCardLike={handleCardLike}
         />
         <Footer />
+        {/* далее идут компоненты с попапами редактирования профиля, аватра, добавления новой карточки (места), попап подверждения при удалении, попап с изображением  */}
         <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
 
         <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />

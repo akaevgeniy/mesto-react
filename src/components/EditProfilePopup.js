@@ -3,6 +3,7 @@ import PopupWithForm from './PopupWithForm';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 
 function EditProfilePopup(props) {
+  //подписываемся на контекст, создаем стейты для имени и инфо о пользователе
   const currentUser = React.useContext(CurrentUserContext);
   const [name, setName] = React.useState('');
   const [description, setDescription] = React.useState('');

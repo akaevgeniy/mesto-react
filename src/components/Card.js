@@ -18,6 +18,7 @@ function Card(props) {
   function handleLikeClick() {
     props.onCardLike(props.card);
   }
+  //обработчик клика по удаления карточки, передаем карточку для удаления
   function handleDeleteClick() {
     props.onCardDeleteClick(props.card);
   }

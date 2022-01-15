@@ -5,7 +5,7 @@ import Card from './Card';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 
 function Main(props) {
-  //объявляем и назначаем изначальные значения стейтов, данные о пользователе
+  //данные о пользователе, делаем подписку на контекст
   const currentUser = React.useContext(CurrentUserContext);
 
   //jsx разметка компонента Main
