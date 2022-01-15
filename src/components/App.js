@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
-import PopupWithForm from './PopupWithForm';
+import DeleteConfirmPopup from './DeleteConfirmPopup';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
@@ -15,7 +15,9 @@ function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
+  const [isConfirmPopupOpen, setConfirmPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({});
+  const [deletedCard, setDeletedCard] = React.useState({});
   const [currentUser, setCurrentUser] = React.useState({});
   //данные о карточках
   const [cards, setCards] = React.useState([]);
@@ -52,6 +54,7 @@ function App() {
       .then((updateCards) => {
         setCards(cards.filter((elem) => elem._id !== card._id));
         console.log(updateCards);
+        closeAllPopups();
       })
       .catch((err) => parseError(err));
   }
@@ -65,11 +68,16 @@ function App() {
   const handleAddPlaceClick = () => {
     setAddPlacePopupOpen(true);
   };
+  const handleDeleteCardClick = (card) => {
+    setConfirmPopupOpen(true);
+    setDeletedCard(card);
+  };
   //функция для закрытия всех попапов
   const closeAllPopups = () => {
     setEditAvatarPopupOpen(false);
     setEditProfilePopupOpen(false);
     setAddPlacePopupOpen(false);
+    setConfirmPopupOpen(false);
     setSelectedCard({});
   };
   //функция, присваивающая нужную карточку стейту
@@ -115,9 +123,9 @@ function App() {
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
           onCardClick={handleCardClick}
+          onCardDeleteClick={handleDeleteCardClick}
           cards={cards}
           onCardLike={handleCardLike}
-          onCardDelete={handleCardDelete}
         />
         <Footer />
         <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
@@ -126,7 +134,7 @@ function App() {
 
         <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} />
 
-        <PopupWithForm name="confirm" title="Вы уверены?" buttonText="Да" onClose={closeAllPopups} />
+        <DeleteConfirmPopup isOpen={isConfirmPopupOpen} onClose={closeAllPopups} onCardDelete={handleCardDelete} card={deletedCard} />
 
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
       </div>

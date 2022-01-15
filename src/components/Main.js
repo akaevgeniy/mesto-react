@@ -29,7 +29,14 @@ function Main(props) {
       </section>
       <section aria-label="label" className="elements">
         {props.cards.map((elem) => (
-          <Card key={elem._id} card={elem} onCardClick={props.onCardClick} onCardLike={props.onCardLike} onCardDelete={props.onCardDelete} />
+          <Card
+            key={elem._id}
+            card={elem}
+            onCardClick={props.onCardClick}
+            onCardLike={props.onCardLike}
+            onCardDeleteClick={props.onCardDeleteClick}
+            onDelete={props.onCardDelete}
+          />
         ))}
       </section>
     </main>
