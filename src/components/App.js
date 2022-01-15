@@ -53,7 +53,7 @@ function App() {
     api
       .deleteCard(card._id)
       .then((updateCards) => {
-        setCards(cards.filter((elem) => elem._id !== card._id));
+        setCards((state) => state.filter((c) => c._id !== card._id));
         console.log(updateCards);
         closeAllPopups();
       })
@@ -82,6 +82,17 @@ function App() {
     setConfirmPopupOpen(false);
     setSelectedCard({});
   };
+  //Обработчик, закрывающий попап при нажатии на Escape
+  React.useEffect(() => {
+    const closeByEscape = (e) => {
+      if (e.key === 'Escape') {
+        closeAllPopups();
+      }
+    };
+    document.addEventListener('keydown', closeByEscape);
+
+    return () => document.removeEventListener('keydown', closeByEscape);
+  }, []);
   //функция, присваивающая нужную карточку стейту (для открытия попапа с рисунком)
   const handleCardClick = (card) => {
     setSelectedCard(card);
